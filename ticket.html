@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney ticket for Yuri</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* ビューポートの高さに合わせる */
+      margin: 0; /* デフォルトのマージンを取り除く */
+    }
+    .ticket {
+      /* デフォルトのスタイルを設定 */
+      max-width: 100%;
+      height: auto;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+    /* スマホ画面での表示を最適化 */
+    @media (min-width: 320px) {
+      .ticket {
+        width: 90%; /* ビューポートの幅に応じて調整 */
+        height: auto; /* 高さは自動で調整 */
+      }
+    }
+    /* タブレットやデスクトップでの表示を最適化 */
+    @media (min-width: 768px) {
+      .ticket {
+        width: 600px; /* タブレットやデスクトップでは固定サイズ */
+        height: 300px;
+      }
+    }
+    .ticket img {
+      width: 100%;
+      height: auto;
+      backface-visibility: hidden; /* 裏側を隠す */
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .ticket.flip {
+      transform: rotateY(180deg); /* 180度回転 */
+    }
+    .front {
+      z-index: 2;
+    }
+    .back {
+      transform: rotateY(180deg); /* 裏面を180度反転させておく */
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticket" id="ticket">
+  <img src="img/front_ticket.png" alt="チケット表" class="front">
+  <img src="img/back_ticket.png" alt="チケット裏" class="back">
+</div>
+
+<script>
+// チケットの要素を取得
+var ticket = document.getElementById('ticket');
+
+// チケットがクリックされたら 'flip' クラスを切り替えるイベントリスナーを追加
+ticket.addEventListener('click', function() {
+  ticket.classList.toggle('flip');
+});
+</script>
+
+</body>
+</html>
